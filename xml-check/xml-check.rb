@@ -32,7 +32,7 @@ end
 
 $log.debug('script called')
 
-svnchanged = NKF.nkf('-s', %x{svnlook changed -t #{TXN} #{REPOS}}.chomp!)
+svnchanged = NKF.nkf('--utf8', %x{svnlook changed -t #{TXN} #{REPOS}}.chomp!)
 
 svnchanged.each { |line|
   if (/U.+¥s(.+xml)$/ =~ line)
