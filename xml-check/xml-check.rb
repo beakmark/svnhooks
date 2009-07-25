@@ -1,13 +1,13 @@
 #!/usr/local/bin/ruby
 
-# pre-commit フックから呼ぶための、xmlチェックツール
+# pre-commit 繝輔ャ繧ｯ縺九ｉ蜻ｼ縺ｶ縺溘ａ縺ｮ縲』ml繝√ぉ繝�繧ｯ繝�繝ｼ繝ｫ
 
 require 'nkf'
 require 'win32ole'
 require 'logger'
 require 'tempfile'
 
-$KCODE = "SJIS"
+$KCODE = 'UTF8'
 ENV['LANG'] = 'ja_JP.UTF-8'
 
 # Constants
@@ -35,7 +35,7 @@ $log.debug('script called')
 svnchanged = NKF.nkf('-s', %x{svnlook changed -t #{TXN} #{REPOS}}.chomp!)
 
 svnchanged.each { |line|
-  if (/U.+\s(.+xml)$/ =~ line)
+  if (/U.+ﾂ･s(.+xml)$/ =~ line)
     tf = Tempfile.new('xml-check')
     $log.debug("check #{$1}")
     IO.foreach("|svnlook cat -t #{TXN} #{REPOS} #{$1}", "r+") { |line|
